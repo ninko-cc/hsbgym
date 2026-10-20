@@ -64,6 +64,13 @@ function setupDrag(canvas) {
     render();
   };
 
+  const end = (e) => {
+    dragging = false;
+    if (canvas.hasPointerCapture(e.pointerId)) {
+      canvas.releasePointerCapture(e.pointerId);
+    }
+  };
+
   canvas.addEventListener("pointerdown", (e) => {
     dragging = true;
     canvas.setPointerCapture(e.pointerId);
@@ -74,10 +81,8 @@ function setupDrag(canvas) {
     if (dragging) update(e);
   });
 
-  canvas.addEventListener("pointerup", (e) => {
-    dragging = false;
-    canvas.releasePointerCapture(e.pointerId);
-  });
+  canvas.addEventListener("pointerup", end);
+  canvas.addEventListener("pointercancel", end);
 }
 
 function round(value, digits = 2) {

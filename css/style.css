@@ -31,6 +31,10 @@ td {
   gap: 1em;
 }
 
+#gradation {
+  touch-action: none;
+}
+
 #hue-slider {
   writing-mode: vertical-lr;
   width: 30px;
