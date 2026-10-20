@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/oklab.js" defer></script>
     <script src="./js/color.js" defer></script>
     <script src="./js/square.js" defer></script>
     <script src="./js/main.js" defer></script>
@@ -49,9 +50,12 @@
           </tr>
         </tbody>
       </table>
-      <div id="chad">There hue go!️️️<span class="jump">🏋</span>️</div>
+      <div>
+        <span id="chad">🏋</span>
+        <span id="message"></span>
+      </div>
     </div>
-    <div class="hbox">
+    <div class="hbox strech">
       <canvas id="gradation" width="400" height="400"></canvas>
       <input id="hue-slider" type="range" min="0" max="360" value="180" />
     </div>

@@ -30,6 +30,11 @@ td {
 .hbox {
   display: flex;
   gap: 1em;
+  align-items: center;
+}
+
+.strech {
+  align-items: stretch;
 }
 
 #gradation {
@@ -54,12 +59,15 @@ td {
 }
 
 #chad {
-  display: flex;
-  align-items: center;
-  visibility: hidden;
+  display: inline-block;
+  font-size: 2em;
 }
 
-.jump {
+#chad.pump {
+  font-size: 4em;
+}
+
+#chad.jump {
   animation: jump 0.4s linear infinite;
 }
 

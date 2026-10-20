@@ -3,6 +3,7 @@ const preview = document.getElementById("preview");
 const gradation = document.getElementById("gradation");
 const slider = document.getElementById("hue-slider");
 const chad = document.getElementById("chad");
+const message = document.getElementById("message");
 const state = { h: 180, s: 0.5, v: 0.5 };
 
 const table = {
@@ -40,18 +41,26 @@ function render() {
   table.s.textContent = round(state.s);
   table.v.textContent = round(state.v);
 
-  chad.style.visibility = match() ? "visible" : "hidden";
+  const targetRGB = hsvToRgb(rh, rs, rv);
+  const previewRGB = hsvToRgb(state.h, state.s, state.v);
+
+  const delta = deltaEOK(targetRGB, previewRGB);
+  const score = calcScore(delta);
+
+  message.textContent = `< score: ${score}`;
+
+  if (score >= 90) {
+    chad.classList.add("jump", "pump");
+  } else {
+    chad.classList.remove("jump", "pump");
+  }
 }
 
-function match() {
-  const dh = Math.abs(rh - state.h);
-  const hueDiff = Math.min(dh, 360 - dh);
-
-  return (
-    hueDiff <= 3 &&
-    Math.abs(rs - state.s) <= 0.04 &&
-    Math.abs(rv - state.v) <= 0.04
-  );
+function calcScore(delta) {
+  const perfect = 0.01;
+  const scale = 0.075;
+  if (delta <= perfect) return 100;
+  return Math.round(100 * Math.exp(-(delta - perfect) / scale));
 }
 
 function setupDrag(canvas) {
