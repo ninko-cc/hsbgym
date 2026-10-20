@@ -42,7 +42,7 @@ td {
   width: 30px;
   appearance: none;
   background: linear-gradient(
-    to bottom,
+    to top,
     hsl(0, 100%, 50%),
     hsl(60, 100%, 50%),
     hsl(120, 100%, 50%),
