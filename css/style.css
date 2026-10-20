@@ -1,0 +1,64 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  margin: 0;
+  padding: 1.5em;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+th,
+td {
+  padding-right: 1.25em;
+}
+
+.hbox {
+  display: flex;
+  gap: 1em;
+}
+
+#hue-slider {
+  writing-mode: vertical-lr;
+  width: 30px;
+  height: 400px;
+  appearance: none;
+  background: linear-gradient(
+    to bottom,
+    hsl(0, 100%, 50%),
+    hsl(60, 100%, 50%),
+    hsl(120, 100%, 50%),
+    hsl(180, 100%, 50%),
+    hsl(240, 100%, 50%),
+    hsl(300, 100%, 50%),
+    hsl(360, 100%, 50%)
+  );
+}
+
+#chad {
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+}
+
+.jump {
+  animation: jump 0.4s linear infinite;
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

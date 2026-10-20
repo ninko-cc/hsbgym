@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/js/color.js" defer></script>
+    <script src="/js/square.js" defer></script>
+    <script src="/js/main.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <title>HSV Gym</title>
+  </head>
+  <body>
+    <h1>HSV Gym</h1>
+    <p>Adjust the color picker to bring "Preview" close to "Target".</p>
+    <div class="hbox">
+      <figure>
+        <figcaption>Target</figcaption>
+        <canvas id="random" width="200" height="200"></canvas>
+      </figure>
+      <figure>
+        <figcaption>Preview</figcaption>
+        <canvas id="preview" width="200" height="200"></canvas>
+      </figure>
+    </div>
+    <div class="hbox">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Target</th>
+            <th>Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>H</th>
+            <td id="h-random"></td>
+            <td id="h-you"></td>
+          </tr>
+          <tr>
+            <th>S</th>
+            <td id="s-random"></td>
+            <td id="s-you"></td>
+          </tr>
+          <tr>
+            <th>V</th>
+            <td id="v-random"></td>
+            <td id="v-you"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="chad">There hue go!️️️<span class="jump">🏋</span>️</div>
+    </div>
+    <div class="hbox">
+      <canvas id="gradation" width="400" height="400"></canvas>
+      <input id="hue-slider" type="range" min="0" max="360" value="180" />
+    </div>
+    <button id="next-color-button">Next Color</button>
+  </body>
+</html>
