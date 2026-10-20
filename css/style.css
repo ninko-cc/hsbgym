@@ -38,6 +38,7 @@ td {
 
 #hue-slider {
   writing-mode: vertical-lr;
+  direction: rtl;
   width: 30px;
   appearance: none;
   background: linear-gradient(
