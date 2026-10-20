@@ -12,6 +12,11 @@ p {
   margin: 0;
 }
 
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 figure {
   margin: 0;
 }
@@ -29,7 +34,6 @@ td {
 #hue-slider {
   writing-mode: vertical-lr;
   width: 30px;
-  height: 400px;
   appearance: none;
   background: linear-gradient(
     to bottom,
