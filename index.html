@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./js/oklab.js" defer></script>
-    <script src="./js/color.js" defer></script>
-    <script src="./js/square.js" defer></script>
+    <script src="./js/deltae76.js" defer></script>
+    <script src="./js/hsv.js" defer></script>
+    <script src="./js/sv-gradation.js" defer></script>
     <script src="./js/main.js" defer></script>
     <link rel="stylesheet" href="./css/style.css" />
     <title>HSB Gym</title>
@@ -16,14 +16,14 @@
     <div class="hbox">
       <figure>
         <figcaption>Target</figcaption>
-        <canvas id="random" width="200" height="200"></canvas>
+        <canvas id="target" width="200" height="200"></canvas>
       </figure>
       <figure>
         <figcaption>Preview</figcaption>
         <canvas id="preview" width="200" height="200"></canvas>
       </figure>
     </div>
-    <div class="hbox">
+    <div class="hbox wrap">
       <table>
         <thead>
           <tr>
@@ -35,30 +35,37 @@
         <tbody>
           <tr>
             <th>H</th>
-            <td id="h-random"></td>
-            <td id="h-you"></td>
+            <td id="h-target"></td>
+            <td id="h-preview"></td>
           </tr>
           <tr>
             <th>S</th>
-            <td id="s-random"></td>
-            <td id="s-you"></td>
+            <td id="s-target"></td>
+            <td id="s-preview"></td>
           </tr>
           <tr>
             <th>B</th>
-            <td id="v-random"></td>
-            <td id="v-you"></td>
+            <td id="v-target"></td>
+            <td id="v-preview"></td>
           </tr>
         </tbody>
       </table>
       <div>
-        <span id="chad">🏋</span>
-        <span id="message"></span>
+        <div id="lamps">
+          <span class="lamp">💡</span>
+          <span class="lamp">💡</span>
+          <span class="lamp">💡</span>
+          <span class="lamp">💡</span>
+          <span class="lamp">💡</span>
+        </div>
+        <div id="description"></div>
+        <div id="score"></div>
       </div>
     </div>
     <div class="hbox strech">
-      <canvas id="gradation" width="400" height="400"></canvas>
-      <input id="hue-slider" type="range" min="0" max="360" value="180" />
+      <canvas id="sv-gradation" width="400" height="400"></canvas>
+      <input id="h-slider" type="range" min="0" max="360" value="180" />
     </div>
-    <button id="next-color-button">Next Color</button>
+    <button id="next-button">Next Color</button>
   </body>
 </html>

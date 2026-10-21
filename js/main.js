@@ -1,66 +1,73 @@
-const random = document.getElementById("random");
-const preview = document.getElementById("preview");
-const gradation = document.getElementById("gradation");
-const slider = document.getElementById("hue-slider");
-const chad = document.getElementById("chad");
-const message = document.getElementById("message");
-const state = { h: 180, s: 0.5, v: 0.5 };
-
-const table = {
-  h: document.getElementById("h-you"),
-  s: document.getElementById("s-you"),
-  v: document.getElementById("v-you"),
+const canvas = {
+  target: document.getElementById("target"),
+  preview: document.getElementById("preview"),
+  gradation: document.getElementById("sv-gradation"),
 };
 
-const { h: rh, s: rs, v: rv } = randomHsv();
-fillCanvasWithHsv(random, rh, rs, rv);
-document.getElementById("h-random").textContent = round(rh, 0);
-document.getElementById("s-random").textContent = round(rs);
-document.getElementById("v-random").textContent = round(rv);
+const display = {
+  target: {
+    h: document.getElementById("h-target"),
+    s: document.getElementById("s-target"),
+    v: document.getElementById("v-target"),
+  },
+  preview: {
+    h: document.getElementById("h-preview"),
+    s: document.getElementById("s-preview"),
+    v: document.getElementById("v-preview"),
+  },
+};
+
+const result = {
+  score: document.getElementById("score"),
+  description: document.getElementById("description"),
+  lamps: document.querySelectorAll(".lamp"),
+};
+
+const slider = document.getElementById("h-slider");
+const nextButton = document.getElementById("next-button");
+
+const state = { h: 180, s: 0.5, v: 0.5 };
+const target = randomHsv();
+
+fillCanvasWithHsv(canvas.target, target.h, target.s, target.v);
+
+display.target.h.textContent = round(target.h);
+display.target.s.textContent = round(target.s);
+display.target.v.textContent = round(target.v);
+
+setupDrag(canvas.gradation);
+render();
 
 slider.addEventListener("input", () => {
   state.h = Number(slider.value);
   render();
 });
 
-setupDrag(gradation);
-render();
-
-document
-  .getElementById("next-color-button")
-  .addEventListener("click", () => location.reload());
+nextButton.addEventListener("click", () => {
+  location.reload();
+});
 
 function render() {
-  const { x, y } = svToPosition(gradation, state.s, state.v);
+  const { x, y } = svToPosition(canvas.gradation, state.s, state.v);
 
-  drawGradation(gradation, state.h);
-  drawPointer(gradation, x, y);
-  fillCanvasWithHsv(preview, state.h, state.s, state.v);
+  drawGradation(canvas.gradation, state.h);
+  drawPointer(canvas.gradation, x, y);
+  fillCanvasWithHsv(canvas.preview, state.h, state.s, state.v);
 
-  table.h.textContent = round(state.h);
-  table.s.textContent = round(state.s);
-  table.v.textContent = round(state.v);
+  display.preview.h.textContent = round(state.h);
+  display.preview.s.textContent = round(state.s);
+  display.preview.v.textContent = round(state.v);
 
-  const targetRGB = hsvToRgb(rh, rs, rv);
+  const targetRGB = hsvToRgb(target.h, target.s, target.v);
   const previewRGB = hsvToRgb(state.h, state.s, state.v);
 
-  const delta = deltaEOK(targetRGB, previewRGB);
-  const score = calcScore(delta);
+  const delta = deltaE76(targetRGB, previewRGB);
+  result.score.textContent = "ΔE76: " + round(delta, 1);
 
-  message.textContent = `< score: ${score}`;
+  const description = describe(delta);
+  result.description.textContent = description.label;
 
-  if (score >= 90) {
-    chad.classList.add("jump", "pump");
-  } else {
-    chad.classList.remove("jump", "pump");
-  }
-}
-
-function calcScore(delta) {
-  const perfect = 0.01;
-  const scale = 0.075;
-  if (delta <= perfect) return 100;
-  return Math.round(100 * Math.exp(-(delta - perfect) / scale));
+  turnon(description.level);
 }
 
 function setupDrag(canvas) {
@@ -92,6 +99,12 @@ function setupDrag(canvas) {
 
   canvas.addEventListener("pointerup", end);
   canvas.addEventListener("pointercancel", end);
+}
+
+function turnon(count) {
+  result.lamps.forEach((lamp, i) => {
+    lamp.classList.toggle("on", i < count);
+  });
 }
 
 function round(value, digits = 2) {

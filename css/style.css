@@ -5,6 +5,7 @@ body {
   gap: 1em;
   margin: 0;
   padding: 1.5em;
+  padding-bottom: 3em;
 }
 
 h1,
@@ -37,11 +38,32 @@ td {
   align-items: stretch;
 }
 
-#gradation {
+.wrap {
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.lamp {
+  filter: grayscale(1) brightness(0.4);
+  opacity: 0.5;
+}
+
+.lamp.on {
+  filter: none;
+  opacity: 1;
+  filter: drop-shadow(0 0 6px gold);
+}
+
+#score,
+#description {
+  color: #555;
+}
+
+#sv-gradation {
   touch-action: none;
 }
 
-#hue-slider {
+#h-slider {
   writing-mode: vertical-lr;
   direction: rtl;
   width: 30px;
@@ -58,25 +80,6 @@ td {
   );
 }
 
-#chad {
-  display: inline-block;
-  font-size: 2em;
-}
-
-#chad.pump {
-  font-size: 4em;
-}
-
-#chad.jump {
-  animation: jump 0.4s linear infinite;
-}
-
-@keyframes jump {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+#next-button {
+  padding: 1em 1.5em;
 }
