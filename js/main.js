@@ -19,7 +19,6 @@ const display = {
 
 const result = {
   score: document.getElementById("score"),
-  description: document.getElementById("description"),
   lamps: document.querySelectorAll(".lamp"),
 };
 
@@ -64,10 +63,7 @@ function render() {
   const delta = deltaE76(targetRGB, previewRGB);
   result.score.textContent = "ΔE76: " + round(delta, 1);
 
-  const description = describe(delta);
-  result.description.textContent = description.label;
-
-  turnon(description.level);
+  turnon(describe(delta).level);
 }
 
 function setupDrag(canvas) {
